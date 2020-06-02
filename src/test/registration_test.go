@@ -191,7 +191,8 @@ func TestRegistration(t *testing.T) {
 
 	// send NAS Security Mode Complete Msg
 	pdu = nasTestpacket.GetSecurityModeComplete(registrationRequest)
-	pdu, err = test.EncodeNasPduWithSecurity(ue, pdu)
+	// skip encryption, integrity. security header will remain 'plain'
+	// pdu, err = test.EncodeNasPduWithSecurity(ue, pdu)
 	assert.Nil(t, err)
 	sendMsg, err = test.GetUplinkNASTransport(ue.AmfUeNgapId, ue.RanUeNgapId, pdu)
 	assert.Nil(t, err)
@@ -212,7 +213,7 @@ func TestRegistration(t *testing.T) {
 
 	// send NAS Registration Complete Msg
 	pdu = nasTestpacket.GetRegistrationComplete(nil)
-	pdu, err = test.EncodeNasPduWithSecurity(ue, pdu)
+	//pdu, err = test.EncodeNasPduWithSecurity(ue, pdu)
 	assert.Nil(t, err)
 	sendMsg, err = test.GetUplinkNASTransport(ue.AmfUeNgapId, ue.RanUeNgapId, pdu)
 	assert.Nil(t, err)
@@ -227,7 +228,7 @@ func TestRegistration(t *testing.T) {
 		Sd:  "010203",
 	}
 	pdu = nasTestpacket.GetUlNasTransport_PduSessionEstablishmentRequest(10, nasMessage.ULNASTransportRequestTypeInitialRequest, "internet", &sNssai)
-	pdu, err = test.EncodeNasPduWithSecurity(ue, pdu)
+	//pdu, err = test.EncodeNasPduWithSecurity(ue, pdu)
 	assert.Nil(t, err)
 	sendMsg, err = test.GetUplinkNASTransport(ue.AmfUeNgapId, ue.RanUeNgapId, pdu)
 	assert.Nil(t, err)
